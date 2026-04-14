@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  reverie:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: reverie:latest
+    container_name: reverie
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      REVERIE_RUN_MODE: Reverie
+      REVERIE_SESSION_ID: reverie
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./workspace:/app/workspace
+      - /etc/localtime:/etc/localtime
+    command: ["python3", "-m", "reverie.cli"]
+
+  lucid:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: reverie:latest
+    container_name: reverie-lucid
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      REVERIE_RUN_MODE: Lucid
+      REVERIE_SESSION_ID: lucid
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./workspace:/app/workspace
+      - /etc/localtime:/etc/localtime
+    command: ["python3", "-m", "reverie.cli"]
+
+  murmur:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: reverie:latest
+    container_name: reverie-murmur
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      REVERIE_RUN_MODE: Murmur
+      REVERIE_SESSION_ID: murmur
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./workspace:/app/workspace
+      - /etc/localtime:/etc/localtime
+    command: ["python3", "-m", "reverie.cli"]
