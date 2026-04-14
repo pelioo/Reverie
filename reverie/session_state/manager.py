@@ -11,8 +11,12 @@ class SessionStateManager:
     def __init__(self, store: SessionStateStore, session_id: str) -> None:
         self.store = store
         self.session_id = session_id
-        self.state = self.store.load(session_id) or SessionState(session_id=session_id)
-        self.store.save(self.state)
+        loaded = self.store.load(session_id)
+        if loaded is not None:
+            self.state = loaded
+        else:
+            self.state = SessionState(session_id=session_id)
+            self.store.save(self.state)
 
     def on_turn_start(self, turn_id: str, mode: str, goal: str | None = None, user_input: str | None = None) -> None:
         self.state.current_turn_id = turn_id
@@ -46,9 +50,9 @@ class SessionStateManager:
 
     def add_tool_result(self, summary: str, keep_last: int = 8) -> None:
         if summary:
-            self.state.recent_tool_results.append(summary)
+            self.state.recent_tool_results.insert(0, summary)
         if len(self.state.recent_tool_results) > keep_last:
-            self.state.recent_tool_results = self.state.recent_tool_results[-keep_last:]
+            self.state.recent_tool_results = self.state.recent_tool_results[:keep_last]
         self._touch()
         self.store.save(self.state)
 

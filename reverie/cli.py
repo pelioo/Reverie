@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import os
+import subprocess
+import sys
 
 from dotenv import load_dotenv
 
@@ -55,13 +57,43 @@ def main() -> None:
         max_idle=args.max_idle,
         messages=args.message,
     )
+
+    api_process: subprocess.Popen[bytes] | None = None
     if args.mode == "Reverie":
-        components.scheduler.run(
-            ticks=args.ticks,
-            print_user_turn=False,
-            print_autonomous_turn=True,
-            run_mode=args.mode,
-        )
+        enable_api = os.getenv("REVERIE_ENABLE_API", "1").lower() not in {"0", "false", "off", "no"}
+        if enable_api:
+            api_host = os.getenv("REVERIE_API_HOST", "0.0.0.0")
+            api_port = os.getenv("REVERIE_API_PORT", "8000")
+            env = os.environ.copy()
+            env["REVERIE_WORKSPACE_ROOT"] = args.workspace_root
+            api_process = subprocess.Popen(
+                [
+                    sys.executable,
+                    "-m",
+                    "uvicorn",
+                    "reverie.api.app:app",
+                    "--host",
+                    api_host,
+                    "--port",
+                    str(api_port),
+                ],
+                env=env,
+            )
+
+        try:
+            components.scheduler.run(
+                ticks=args.ticks,
+                print_user_turn=False,
+                print_autonomous_turn=True,
+                run_mode=args.mode,
+            )
+        finally:
+            if api_process and api_process.poll() is None:
+                api_process.terminate()
+                try:
+                    api_process.wait(timeout=3)
+                except subprocess.TimeoutExpired:
+                    api_process.kill()
         return
 
     tui = TuiController(

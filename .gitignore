@@ -215,8 +215,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Runtime
-runtime/
+# Frontend
+node_modules/
 
 # Workspace
 workspace/

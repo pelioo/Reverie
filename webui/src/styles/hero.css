@@ -1,0 +1,285 @@
+.hero-wave-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: #374151;
+  font-size: 12px;
+}
+
+.wave-stage {
+  flex: 1;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #fbfcff, #f4f8ff);
+  position: relative;
+  overflow: hidden;
+  transition: background 4.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wave-stage.state-awakening {
+  background: linear-gradient(180deg, #fbfcff, #f4f8ff);
+}
+
+.wave-stage.state-reflect {
+  background: linear-gradient(180deg, #fbfcff, #f4f8ff);
+}
+
+.wave-stage.state-processing {
+  background: linear-gradient(180deg, #f8f7ff, #eef0ff);
+}
+
+.wave-stage.state-consolidate {
+  background: linear-gradient(180deg, #f8f7ff, #eef0ff);
+}
+
+.wave-stage.state-reflecting {
+  background: linear-gradient(180deg, #f5fdfc, #ebf8f7);
+}
+
+.wave-stage.state-explore {
+  background: linear-gradient(180deg, #f5fdfc, #ebf8f7);
+}
+
+.wave-stage.state-curate {
+  background: linear-gradient(180deg, #f5fdfc, #ebf8f7);
+}
+
+.wave-stage.state-consolidating {
+  background: linear-gradient(180deg, #f4fbff, #e8f5fd);
+}
+
+.wave-stage.state-practice {
+  background: linear-gradient(180deg, #f4fbff, #e8f5fd);
+}
+
+.wave-stage.state-pursue_goal {
+  background: linear-gradient(180deg, #f4fbff, #e8f5fd);
+}
+
+.wave-stage.state-rest {
+  background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+}
+
+.wave-svg {
+  width: 100%;
+  height: 100%;
+  shape-rendering: geometricPrecision;
+}
+
+.wave {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 4.2s cubic-bezier(0.22, 1, 0.36, 1);
+  vector-effect: non-scaling-stroke;
+}
+
+.wave-a {
+  stroke-width: 0.95;
+}
+
+.wave-b {
+  stroke-width: 0.62;
+}
+
+.wave-c {
+  stroke-width: 0.42;
+}
+
+.state-awakening.wave-a,
+.state-awakening.wave-b,
+.state-awakening.wave-c {
+  stroke: #64748b;
+}
+
+.state-reflect.wave-a,
+.state-reflect.wave-b,
+.state-reflect.wave-c,
+.state-rest.wave-a,
+.state-rest.wave-b,
+.state-rest.wave-c {
+  stroke: #64748b;
+}
+
+.state-processing.wave-a,
+.state-processing.wave-b,
+.state-processing.wave-c {
+  stroke: var(--accent);
+}
+
+.state-consolidate.wave-a,
+.state-consolidate.wave-b,
+.state-consolidate.wave-c,
+.state-pursue_goal.wave-a,
+.state-pursue_goal.wave-b,
+.state-pursue_goal.wave-c {
+  stroke: var(--accent);
+}
+
+.state-reflecting.wave-a,
+.state-reflecting.wave-b,
+.state-reflecting.wave-c {
+  stroke: #0f766e;
+}
+
+.state-explore.wave-a,
+.state-explore.wave-b,
+.state-explore.wave-c,
+.state-curate.wave-a,
+.state-curate.wave-b,
+.state-curate.wave-c {
+  stroke: #0f766e;
+}
+
+.state-consolidating.wave-a,
+.state-consolidating.wave-b,
+.state-consolidating.wave-c {
+  stroke: var(--accent-2);
+}
+
+.state-practice.wave-a,
+.state-practice.wave-b,
+.state-practice.wave-c {
+  stroke: var(--accent-2);
+}
+
+.core-orb {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(84px, 10.5vw, 136px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 0 0 9px rgba(79, 70, 229, 0.08),
+    0 14px 30px rgba(79, 70, 229, 0.18);
+  display: grid;
+  place-items: center;
+  animation: orb-breathe var(--breath-duration, 3.2s) ease-in-out infinite;
+  transition:
+    box-shadow 4.2s cubic-bezier(0.22, 1, 0.36, 1),
+    background 4.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 4.2s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 4.2s cubic-bezier(0.22, 1, 0.36, 1);
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.9), rgba(79, 70, 229, 0.2) 52%, rgba(79, 70, 229, 0.5) 100%);
+}
+
+.core-orb-inner {
+  width: 31%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(79, 70, 229, 0.8);
+  filter: blur(0.1px);
+  transition: background 4.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes orb-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(calc(var(--core-scale, 1) * 0.98));
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(calc(var(--core-scale, 1) * 1.12));
+  }
+}
+
+.wave-stage.state-awakening .core-orb {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+    0 0 0 9px rgba(100, 116, 139, 0.09),
+    0 12px 24px rgba(100, 116, 139, 0.14);
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.95), rgba(100, 116, 139, 0.2) 56%, rgba(100, 116, 139, 0.44) 100%);
+}
+
+.wave-stage.state-reflect .core-orb,
+.wave-stage.state-rest .core-orb {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+    0 0 0 9px rgba(100, 116, 139, 0.09),
+    0 12px 24px rgba(100, 116, 139, 0.14);
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.95), rgba(100, 116, 139, 0.2) 56%, rgba(100, 116, 139, 0.44) 100%);
+}
+
+.wave-stage.state-processing .core-orb {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 0 0 10px rgba(79, 70, 229, 0.12),
+    0 16px 34px rgba(79, 70, 229, 0.24);
+}
+
+.wave-stage.state-consolidate .core-orb,
+.wave-stage.state-pursue_goal .core-orb {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 0 0 10px rgba(79, 70, 229, 0.12),
+    0 16px 34px rgba(79, 70, 229, 0.24);
+}
+
+.wave-stage.state-processing .core-orb-inner {
+  background: rgba(79, 70, 229, 0.9);
+}
+
+.wave-stage.state-consolidate .core-orb-inner,
+.wave-stage.state-pursue_goal .core-orb-inner {
+  background: rgba(79, 70, 229, 0.9);
+}
+
+.wave-stage.state-reflecting .core-orb {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 0 0 8px rgba(15, 118, 110, 0.1),
+    0 14px 30px rgba(15, 118, 110, 0.18);
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.93), rgba(15, 118, 110, 0.2) 56%, rgba(15, 118, 110, 0.45) 100%);
+}
+
+.wave-stage.state-explore .core-orb,
+.wave-stage.state-curate .core-orb {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 0 0 8px rgba(15, 118, 110, 0.1),
+    0 14px 30px rgba(15, 118, 110, 0.18);
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.93), rgba(15, 118, 110, 0.2) 56%, rgba(15, 118, 110, 0.45) 100%);
+}
+
+.wave-stage.state-reflecting .core-orb-inner {
+  background: rgba(15, 118, 110, 0.88);
+}
+
+.wave-stage.state-explore .core-orb-inner,
+.wave-stage.state-curate .core-orb-inner {
+  background: rgba(15, 118, 110, 0.88);
+}
+
+.wave-stage.state-consolidating .core-orb {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 0 0 9px rgba(14, 165, 233, 0.11),
+    0 15px 32px rgba(14, 165, 233, 0.2);
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.93), rgba(14, 165, 233, 0.22) 56%, rgba(14, 165, 233, 0.48) 100%);
+}
+
+.wave-stage.state-practice .core-orb {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+    0 0 0 9px rgba(14, 165, 233, 0.11),
+    0 15px 32px rgba(14, 165, 233, 0.2);
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.93), rgba(14, 165, 233, 0.22) 56%, rgba(14, 165, 233, 0.48) 100%);
+}
+
+.wave-stage.state-consolidating .core-orb-inner {
+  background: rgba(14, 165, 233, 0.86);
+}
+
+.wave-stage.state-practice .core-orb-inner {
+  background: rgba(14, 165, 233, 0.86);
+}
+
+.mind-state {
+  margin-top: 6px;
+}

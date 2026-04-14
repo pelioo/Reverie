@@ -2,8 +2,13 @@
 
 set -euo pipefail
 
-# 1) Start the Reverie (dream mode) container in the background
-docker compose up -d reverie
+# Start backend(core+api) and webui together
+docker compose up -d
 
-# 2) Enter the same container and start a Lucid (dialog mode) session
-exec docker compose exec reverie python3 -m reverie.cli --mode Lucid --session-id lucid
+echo "Reverie backend(core+api) and webui are starting..."
+echo "WebUI: http://localhost:5173"
+echo "API:   http://localhost:8000/health"
+
+# Keep original behavior: directly enter a Lucid interactive session
+exec docker compose exec \
+  backend python3 -m reverie.cli --mode Lucid --session-id lucid

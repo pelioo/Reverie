@@ -1,59 +1,39 @@
-version: "3.9"
-
 services:
-  reverie:
+  backend:
     build:
       context: .
       dockerfile: Dockerfile
     image: reverie:latest
-    container_name: reverie
+    container_name: reverie-backend
     working_dir: /app
     env_file:
       - .env
     environment:
       REVERIE_RUN_MODE: Reverie
       REVERIE_SESSION_ID: reverie
+      REVERIE_ENABLE_API: "1"
+      REVERIE_API_HOST: 0.0.0.0
+      REVERIE_API_PORT: "8000"
+      REVERIE_WORKSPACE_ROOT: workspace
     stdin_open: true
     tty: true
     volumes:
       - ./workspace:/app/workspace
       - /etc/localtime:/etc/localtime
-    command: ["python3", "-m", "reverie.cli"]
+    ports:
+      - "8000:8000"
+    command: ["python3", "-m", "reverie.cli", "--mode", "Reverie", "--session-id", "reverie"]
 
-  lucid:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: reverie:latest
-    container_name: reverie-lucid
-    working_dir: /app
-    env_file:
-      - .env
+  webui:
+    image: node:20-alpine
+    container_name: reverie-webui
+    working_dir: /app/webui
     environment:
-      REVERIE_RUN_MODE: Lucid
-      REVERIE_SESSION_ID: lucid
-    stdin_open: true
-    tty: true
+      VITE_API_PROXY_TARGET: http://backend:8000
+    depends_on:
+      - backend
     volumes:
-      - ./workspace:/app/workspace
-      - /etc/localtime:/etc/localtime
-    command: ["python3", "-m", "reverie.cli"]
-
-  murmur:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: reverie:latest
-    container_name: reverie-murmur
-    working_dir: /app
-    env_file:
-      - .env
-    environment:
-      REVERIE_RUN_MODE: Murmur
-      REVERIE_SESSION_ID: murmur
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./workspace:/app/workspace
-      - /etc/localtime:/etc/localtime
-    command: ["python3", "-m", "reverie.cli"]
+      - ./:/app
+    ports:
+      - "5173:5173"
+    command: ["sh", "-c", "npm install && npm run dev -- --host 0.0.0.0 --port 5173"]

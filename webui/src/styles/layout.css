@@ -1,0 +1,103 @@
+.app-shell {
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  padding: 10px 14px 14px;
+  position: relative;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.topbar,
+.dashboard-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.topbar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.brand {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+}
+
+.dashboard-grid {
+  height: calc(100vh - 62px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.92fr 1fr;
+  gap: 10px;
+}
+
+.cell {
+  min-height: 0;
+}
+
+.hero-cell {
+  grid-row: 1 / span 2;
+  grid-column: 1;
+}
+
+.stats-cell {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.intent-cell {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.activity-cell {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.memory-cell {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.soul-cell {
+  display: none;
+}
+
+.panel {
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff, var(--surface-2));
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  padding: 10px;
+  overflow: hidden;
+}
+
+.panel-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.panel-title-row.compact {
+  margin-bottom: 8px;
+}

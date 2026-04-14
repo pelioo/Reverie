@@ -61,21 +61,18 @@ class ToolResultNormalizer:
                 f"approved {result.raw.get('approved_seconds')}s"
             )
         if result.tool_name == "run_command":
-            stdout = result.raw.get("stdout", "")
-            stderr = result.raw.get("stderr", "")
-            excerpt = self._excerpt(stdout, 200) or self._excerpt(stderr, 200)
+            command = result.raw.get("command")
+            stdout = result.raw.get("stdout")
+            stdout = stdout if len(stdout) < 200 else stdout[:200] + "..."
             summary = (
-                f"Command completed (code={result.raw.get('returncode')}), "
-                f"stdout_len={len(stdout)}, stderr_len={len(stderr)}"
+                f"Command Completed: {command}.\n"
+                f"{stdout}"
             )
-            if excerpt:
-                summary += f", output excerpt: {excerpt}"
             return summary
         if result.tool_name == "read_file":
-            excerpt = self._excerpt(result.raw.get("content", ""), 220)
             truncated = result.raw.get("truncated")
             suffix = " (truncated)" if truncated else ""
-            return f"Read file {result.raw.get('path')}{suffix}, excerpt: {excerpt}"
+            return f"Read file {result.raw.get('path')}{suffix}"
         if result.tool_name == "write_file":
             return f"Wrote file {result.raw.get('path')}, bytes={result.raw.get('bytes')}"
         if result.tool_name == "search_files":
@@ -98,10 +95,3 @@ class ToolResultNormalizer:
         if not facts:
             facts.append("ok=true")
         return facts[:6]
-
-    @staticmethod
-    def _excerpt(text: str, limit: int) -> str:
-        clean = (text or "").replace("\n", " ").strip()
-        if not clean:
-            return "(empty)"
-        return clean[:limit] + ("…" if len(clean) > limit else "")

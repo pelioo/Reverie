@@ -1,0 +1,138 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.stat-value {
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.stat-hint {
+  margin-top: 3px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.intent-card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px;
+  height: calc(100% - 28px);
+  background: #fff;
+  overflow: auto;
+}
+
+.intent-meta {
+  margin-top: 4px;
+}
+
+.intent-body {
+  margin-top: 6px;
+  line-height: 1.35;
+  font-size: 12px;
+  color: #1f2937;
+}
+
+.intent-markdown {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #1f2937;
+}
+
+.intent-markdown p {
+  margin: 0 0 8px;
+}
+
+.intent-markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.intent-markdown ul,
+.intent-markdown ol {
+  margin: 6px 0 8px 18px;
+  padding: 0;
+}
+
+.intent-markdown li {
+  margin: 2px 0;
+}
+
+.intent-markdown code {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 0 4px;
+  font-size: 11px;
+}
+
+.intent-markdown pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 8px;
+  overflow-x: auto;
+  margin: 8px 0;
+}
+
+.intent-markdown pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.intent-next {
+  color: #0f172a;
+}
+
+.intent-tool-results {
+  margin-top: 8px;
+  display: grid;
+  gap: 5px;
+}
+
+.intent-tools-title {
+  margin: 2px 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.intent-tool-result {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px;
+  align-items: center;
+}
+
+.tool-badge {
+  font-size: 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 6px;
+  background: #eef2ff;
+}
+
+.tool-badge.ok {
+  color: var(--ok);
+}
+
+.tool-summary,
+.intent-memory-path {
+  font-size: 11px;
+  color: #374151;
+}
+
+.intent-memory-path {
+  margin-top: 7px;
+}

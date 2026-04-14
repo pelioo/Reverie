@@ -14,11 +14,17 @@ class SessionStateStore:
         (self.base / "checkpoints").mkdir(parents=True, exist_ok=True)
 
     def load(self, session_id: str) -> SessionState | None:
-        path = self.base / f"{session_id}.json"
+        path = self.path_for(session_id)
         if not path.exists():
             return None
         data = json.loads(path.read_text(encoding="utf-8"))
         return SessionState.from_json_dict(data)
+
+    def path_for(self, session_id: str) -> Path:
+        return self.base / f"{session_id}.json"
+
+    def exists(self, session_id: str) -> bool:
+        return self.path_for(session_id).exists()
 
     def save(self, session: SessionState) -> None:
         path = self.base / f"{session.session_id}.json"

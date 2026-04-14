@@ -1,0 +1,61 @@
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.95fr 0.95fr 1fr;
+    overflow-y: auto;
+    height: calc(100vh - 62px);
+    padding-right: 2px;
+  }
+
+  .hero-cell {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+  }
+
+  .stats-cell {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .intent-cell {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .activity-cell {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .memory-cell {
+    grid-column: 2;
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    max-height: none;
+    overflow: auto;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  .hero-cell,
+  .stats-cell,
+  .intent-cell,
+  .activity-cell,
+  .memory-cell {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .panel {
+    min-height: 220px;
+  }
+}

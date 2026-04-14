@@ -1,0 +1,194 @@
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 5px;
+  max-height: calc(100% - 30px);
+  overflow-y: auto;
+}
+
+.activity-item {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 6px;
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 7px;
+  background: #fff;
+  align-items: start;
+}
+
+.activity-text-wrap {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.activity-time {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  min-width: 74px;
+  max-width: 74px;
+  font-size: 11px;
+  line-height: 1.15;
+  letter-spacing: 0.1px;
+  color: #374151;
+}
+
+.activity-time-day {
+  font-size: 10px;
+  color: #64748b;
+}
+
+.activity-time-hm {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.activity-kind {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 1px 6px;
+  font-size: 10px;
+  border: 1px solid var(--line);
+}
+
+.kind-intent {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.kind-tool {
+  background: #ecfeff;
+  color: #0e7490;
+}
+
+.kind-result {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.kind-scheduler {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.activity-text {
+  font-size: 11px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.memory-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.memory-controls button {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 6px;
+  font-size: 11px;
+  padding: 1px 7px;
+  cursor: pointer;
+}
+
+.memory-tip {
+  margin-top: -2px;
+  margin-bottom: 6px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.memory-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.memory-group-chip {
+  font-size: 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 7px;
+  background: #f8fafc;
+  color: #334155;
+}
+
+.constellation {
+  height: calc(100% - 74px);
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  cursor: grab;
+}
+
+.constellation.dragging {
+  cursor: grabbing;
+}
+
+.constellation-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.memory-edges {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.memory-edge-line {
+  stroke: #cbd5e1;
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+
+.node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 5px 8px;
+  font-size: 18px;
+  line-height: 1.25;
+  text-align: left;
+  background: #fff;
+  width: 256px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+  cursor: grab;
+  user-select: none;
+}
+
+.node.dragging {
+  cursor: grabbing;
+  z-index: 3;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+}
+
+.node-episodic {
+  color: #4338ca;
+}
+
+.node-semantic {
+  color: #0f766e;
+}
+
+.node-reflective {
+  color: #1d4ed8;
+}
+
+.node-procedural {
+  color: #374151;
+}

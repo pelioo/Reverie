@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 RUN python -m pip install --no-cache-dir --upgrade pip \
-    && python -m pip install --no-cache-dir openai python-dotenv
+    && python -m pip install --no-cache-dir openai python-dotenv fastapi uvicorn
 
 COPY . /app
 
