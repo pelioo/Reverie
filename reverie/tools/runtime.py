@@ -28,13 +28,16 @@ class ToolRuntime:
     def openai_tools(self) -> list[dict[str, Any]]:
         tools: list[dict[str, Any]] = []
         for spec in self.available_tools():
+            schema = dict(spec.input_schema) if spec.input_schema else {}
+            schema.setdefault("type", "object")
+            schema.setdefault("properties", {})
             tools.append(
                 {
                     "type": "function",
                     "function": {
                         "name": spec.name,
                         "description": spec.description,
-                        "parameters": spec.input_schema,
+                        "parameters": schema,
                     },
                 }
             )
