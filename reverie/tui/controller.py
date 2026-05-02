@@ -1,8 +1,12 @@
 from __future__ import annotations
 
 import threading
-import termios
 from dataclasses import dataclass
+
+try:
+    import termios
+except ImportError:
+    termios = None  # Windows / non-Unix
 
 from ..orchestrator import InputEvent
 from ..scheduler import InputQueue, SchedulerLoop
@@ -56,10 +60,11 @@ class TuiController:
             if self.stop_event.is_set():
                 break
             try:
-                try:
-                    termios.tcflush(0, termios.TCIFLUSH)
-                except Exception:
-                    pass
+                if termios:
+                    try:
+                        termios.tcflush(0, termios.TCIFLUSH)
+                    except Exception:
+                        pass
                 line = input("you> ").strip()
             except EOFError:
                 self.stop_event.set()
