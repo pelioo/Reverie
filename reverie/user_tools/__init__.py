@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """User-defined tools entry package.
 
 Reverie tries to import `reverie.user_tools` on startup and calls
@@ -11,9 +9,12 @@ Suggested usage:
 3) Import and register it in `get_user_tool_bindings()`
 """
 
+from __future__ import annotations
+
 from ..tools.registry import ToolBinding
 
 from .user_tool_guide import user_tool_guide_tool
+from .web_search import get_web_search_binding
 
 
 def get_user_tool_bindings() -> list[ToolBinding]:
@@ -28,5 +29,7 @@ def get_user_tool_bindings() -> list[ToolBinding]:
                 "properties": {},
             },
             handler=user_tool_guide_tool,
-        )
+        ),
+        # Web search tool
+        get_web_search_binding(),
     ]
